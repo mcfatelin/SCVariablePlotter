@@ -3,10 +3,10 @@ Python code for query and plotting SC variables
 
 Basic usage
 ------------------ Query the SC variables into pickle ---------------------
-################################
-# The code is for extracting the SC variables
-# from the SC database Chris made:
-# https://xecluster.lngs.infn.it/dokuwiki/lib/exe/fetch.php?media=xenon:xenon1t:analysis:meetings:my_sc_adventure.html
+
+The code is for extracting the SC variables
+from the SC database Chris made:
+https://xecluster.lngs.infn.it/dokuwiki/lib/exe/fetch.php?media=xenon:xenon1t:analysis:meetings:my_sc_adventure.html
 ========== Syntax: =============
 python BatchQuerySC.py 
 <variable list>
