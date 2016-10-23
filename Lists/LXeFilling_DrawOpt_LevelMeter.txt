@@ -1,0 +1,17 @@
+XE1T.GEN_CE901B_LLM2_CMON.PI											l
+XE1T.GEN_CE911_SLM1_CMON.PI												s1
+XE1T.GEN_CE912_SLM2_CMON.PI												s2
+XE1T.GEN_CE913_SLM3_CMON.PI												s3
+XE1T.GEN_CE914_SLM4_CMON.PI												s4
+XE1T.CRY_PT101_PCHAMBER_AI.PI											P
+XE1T.CRY_FCV104FMON.PI															F
+
+l																LLM[pF]										0.05 			0.95				1
+(s1-7.4104)/0.41602						    	SLM1_height[mm]						0.05				0.95				600
+(s2-13.6547)/0.77157							SLM2_height[mm]						0.05				0.95				908
+(s3-13.8303)/0.78381							SLM3_height[mm]						0.05				0.95				414
+(s4-14.2974)/0.83218							SLM4_height[mm]						0.05				0.95				870
+
+
+
+

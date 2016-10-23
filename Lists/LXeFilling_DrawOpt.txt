@@ -1,0 +1,22 @@
+XE1T.CRY_TE101_TCRYOBOTT_AI.PI										a
+XE1T.CRY_PT101_PCHAMBER_AI.PI											p
+XE1T.CRY_R121_PMON_AI_IND_A_.PI										h
+XE1T.CRY_TE102_TCRYOBOTPMT_AI.PI									b
+XE1T.CRY_TE103_TCRYOMIDDLE_AI.PI									t3
+XE1T.PUR_FC201_FMON.PI															x
+XE1T.PUR_FC202_FMON.PI															y
+XE1T.CRY_TE107_TCRYOTOP_AI.PI											c
+XE1T.RSX_WI301_MMON_AI.PI													w
+XE1T.GEN_CE901B_LLM2_CMON.PI											l
+XE1T.RSX_PT302_PMON_ALMAI_IND_A_.PI							P
+XE1T.CRY_TE107_TCRYOTOP_AI.PI											t7
+
+
+
+p															PT101[bara]									0.65				0.95						k
+cumulative(x+y)/60.*0.00589			Mass[kg]										0.05				0.95							b
+260-h													Heat_load[W]								0.3				0.7							r
+a															TE101[C]										0.05				0.4						g
+t3															TE103[C]										0.05				0.4						m
+
+

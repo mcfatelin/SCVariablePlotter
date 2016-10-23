@@ -1,0 +1,12 @@
+XE1T_PUR_GVLV_FV217_G_REQ2SCADA_ST		S2
+XE1T_PUR_GVLV_FV224_G_REQ2SCADA_ST		S1
+
+
+
+S2			Status2									0.55					0.95					632
+S1			Status1									0.05					0.55					1
+
+
+
+
+
