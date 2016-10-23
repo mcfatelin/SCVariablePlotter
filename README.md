@@ -41,7 +41,7 @@ python DrawPars.py .......
  
 1) # Historian Tag 	...	 #Alias name
 
-2) # formulat with alias \t....\t # title \t...\t [lowest y at xx of the whole canvas] \t...\t [uppermost y at xx of the whole canvas] \t...\t [python color]
+2) # formulat with alias \t....\t # title \t...\t [lowest coordinate of the whole canvas] \t...\t [uppermost y coordinate of the whole canvas] \t...\t [python color]
 
 Note that the different elements MUST be separated by \t
 
