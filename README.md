@@ -66,9 +66,15 @@ Variable#1         Description#1          Y_Fraction_lower#1            Y_Fracti
 ........
 
 Note:
-     Description contains no space.
+
+Description contains no space.
      
-     Y_Fraction_lower and Y_Fraction_upper limit the curve in (Y_Fraction_lower, Y_Fraction_upper) of the whole canvas.
+Y_Fraction_lower and Y_Fraction_upper limit the curve in (Y_Fraction_lower, Y_Fraction_upper) of the whole canvas.
      
-     Color is python color notation.
+Color is python color notation.
+
+
+You can find the example in List/LXeFilling_DrawOpt.txt.
+
+
 
