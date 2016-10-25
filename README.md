@@ -67,7 +67,7 @@ Variable#1         Description#1          Y_Fraction_lower#1            Y_Fracti
 
 Note:
 
-a)Variable can be simple calculation (+, -, *, /), plus differential (x) and cumulative(x) for differential and cumulative the trend over time.
+a)Variable can be simple calculation (+, -, *, /) of the aliases, plus differential (x) and cumulative(x) for differential and cumulative the trend over time.
 
 b)Description contains no space.
      
