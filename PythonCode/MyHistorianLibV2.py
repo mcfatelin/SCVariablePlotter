@@ -11,9 +11,7 @@ from subprocess import Popen, PIPE
 import numpy as np
 import re
 import json
-import ROOT
 import numexpr as ne
-from ROOT import *
 
 GAxisWidth = 200.
 PlotWidth = 800.
@@ -42,41 +40,6 @@ def is_number(s):
         pass
  
     return False
-
-# define reading of the list files
-# return {ParNames, Alias}, Equations, Descriptions, Lower_Margins, Upper_Margins, ColorAtts
-def ReadList(filename):
-    fin = open(filename)
-    lines = fin.readlines()
-    fin.close()
-    ParNameAliases = {}
-    Equations = []
-    Descriptions = []
-    LowerMarginPercentages = []
-    UpperMarginPercentages = []
-    ColorAtts = []
-    for line in lines:
-        contents = re.split("[\t \n]+", line[:-1])
-        if (not len(contents)==2) and (not len(contents)==5):
-            continue
-        elif len(contents)==2:
-            ParNameAliases[str(contents[0])] = contents[1]
-        elif (not is_number(contents[2])) or (not is_number(contents[3])) or (not is_number(contents[4])):
-            continue
-        else:
-            Equations.append(contents[0])
-            Descriptions.append(contents[1])
-            LowerMarginPercentages.append(float(contents[2]))
-            UpperMarginPercentages.append(float(contents[3]))
-            ColorAtts.append(int(contents[4]))
-    return (
-                 ParNameAliases,
-                 Equations,
-                 Descriptions,
-                 LowerMarginPercentages,
-                 UpperMarginPercentages,
-                 ColorAtts
-                )
 
 # Get unixtime from time stamp
 def GetUnixTimeFromTimeStamp(timestamp):
@@ -161,84 +124,6 @@ def GetFilteredList(UnixTimes, Values):
         PreviousValue = value
         counter = counter + 1
     return (FilteredUnixTimes, FilteredValues)
-
-# contruct TGraph
-def ConstructGraph(UnixTimes,
-                                 Values,
-                                 Description,
-                                 LowerMarginPercentage,
-                                 UpperMarginPercentage,
-                                 xlower,
-                                 xupper,
-                                 ylower,
-                                 yupper,
-                                 ColorAtt,
-                                 Counter
-                                 ):
-    g = ROOT.TGraph()
-    UnixTimes, Values = GetFilteredList(UnixTimes, Values)
-    ValueMin = np.amin(Values)
-    ValueMax = np.amax(Values)
-    # re-calculate
-    TrueValueMin = (
-        LowerMarginPercentage*ValueMax - UpperMarginPercentage*ValueMin
-        ) / (LowerMarginPercentage - UpperMarginPercentage)
-    TrueValueMax = (ValueMin - ValueMax) / (LowerMarginPercentage - UpperMarginPercentage) + TrueValueMin
-    if Counter==0:
-        ylower = TrueValueMin
-        yupper = TrueValueMax
-    counter2 = 0
-    scale_factor = (yupper - ylower) / (TrueValueMax - TrueValueMin)
-    shift = ylower - TrueValueMin*scale_factor
-    for unixtime, value in zip(UnixTimes, Values):
-        g.SetPoint(counter2, unixtime, value*scale_factor + shift)
-        counter2 = counter2 + 1
-    g.SetLineWidth(2)
-    g.SetLineColor(ColorAtt)
-    g.GetXaxis().SetLabelFont(132)
-    g.GetXaxis().SetLabelSize(0.05)
-    g.GetXaxis().SetTitleFont(132)
-    g.GetXaxis().SetTitleSize(0.05)
-    g.GetXaxis().CenterTitle()
-    g.GetXaxis().SetTitle("Date time")
-    g.GetXaxis().SetRangeUser(xlower, xupper)
-    g.GetYaxis().SetLabelFont(132)
-    g.GetYaxis().SetLabelSize(0.05)
-    g.GetYaxis().SetLabelColor(ColorAtt)
-    g.GetYaxis().SetTitleFont(132)
-    g.GetYaxis().SetTitleSize(0.05)
-    g.GetYaxis().CenterTitle()
-    g.GetYaxis().SetTitleColor(ColorAtt)
-    g.GetYaxis().SetTitle(Description)
-    g.GetYaxis().SetRangeUser(ylower, yupper)
-    g.GetXaxis().SetTimeDisplay(1)
-    # print(str(ylower)+" "+str(yupper))
-    if Counter==0:
-        g.GetYaxis().SetRangeUser(TrueValueMin, TrueValueMax)
-    if xupper-xlower<7200.:
-        g.GetXaxis().SetTimeFormat("%H:%M %F 1970-01-01 00:00:00")
-    elif xupper-xlower<3600.*24.:
-        g.GetXaxis().SetTimeFormat("%Hh %F 1970-01-01 00:00:00")
-    elif xupper-xlower<3600.*24.*30:
-        g.GetXaxis().SetTimeFormat("%d-%Hh %F 1970-01-01 00:00:00")
-    elif xupper-xlower<3600.*24.*365:
-        g.GetXaxis().SetTimeFormat("%m/%d %Hhr %F 1970-01-01 00:00:00")
-    # gaxis construction
-    GaxisTimeWidth = GAxisWidth/PlotWidth*(xupper - xlower)
-    GaxisTime = GaxisTimeWidth*float(Counter - 1) + xupper
-    gaxis = ROOT.TGaxis(GaxisTime, ylower, GaxisTime, yupper, TrueValueMin, TrueValueMax, 510, "+")
-    gaxis.SetLineColor(ColorAtt)
-    gaxis.SetLabelFont(132)
-    gaxis.SetLabelSize(0.04)
-    gaxis.SetLabelOffset(0.02)
-    gaxis.SetLabelColor(ColorAtt)
-    gaxis.SetTitleFont(132)
-    gaxis.SetTitleSize(0.06)
-    gaxis.SetTitleOffset(0.35)
-    gaxis.SetTitleColor(ColorAtt)
-    gaxis.CenterTitle()
-    gaxis.SetTitle(Description)
-    return (g, gaxis, TrueValueMin, TrueValueMax)    
 
 # 
 def IsFuncInEq(Equation):

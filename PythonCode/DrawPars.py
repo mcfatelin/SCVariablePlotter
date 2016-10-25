@@ -37,7 +37,8 @@ fin.close()
 
 for line in lines:
     line = line.replace("\n", "")
-    contents = line.split("\t")
+    line = line.replace("\t", "")
+    contents = line.split(" ")
     Contents = []
     for content in contents:
         if len(content)>0:

@@ -5,58 +5,6 @@ import scipy as scp
 import os, sys
 import time, datetime
 
-import ROOT
-from ROOT import TH1
-from ROOT import TH1D
-from ROOT import TGraph
-
-def GetFrame(hname, MinUnixTime, MaxUnixTime, MinValue, MaxValue, xtitle, ytitle):
-    hframe = TH1D(hname, "", 100, MinUnixTime/3600./24., MaxUnixTime/3600./24.)
-    hframe.SetStats(0)
-    hframe.GetXaxis().SetLabelFont(132)
-    hframe.GetXaxis().SetTitleFont(132)
-    hframe.GetYaxis().SetLabelFont(132)
-    hframe.GetYaxis().SetTitleFont(132)
-    hframe.GetXaxis().SetLabelSize(0.)
-    hframe.GetXaxis().SetTitleSize(0.)
-    hframe.GetYaxis().SetLabelSize(0.)
-    hframe.GetYaxis().SetTitleSize(0.)
-    hframe.GetYaxis().SetRangeUser(MinValue, MaxValue)
-    if len(xtitle)>0:
-        hframe.GetXaxis().SetLabelSize(0.06)
-        hframe.GetXaxis().SetTitleSize(0.06)
-        hframe.GetXaxis().CenterTitle()
-        hframe.GetXaxis().SetTitle(xtitle)
-    if len(ytitle)>0:
-        hframe.GetYaxis().SetLabelSize(0.06)
-        hframe.GetYaxis().SetTitleSize(0.06)
-        hframe.GetYaxis().CenterTitle()
-        hframe.GetYaxis().SetTitle(ytitle)
-    return hframe
-
-def GetFrameSecondUnit(hname, MinUnixTime, MaxUnixTime, MinValue, MaxValue, xtitle, ytitle):
-    hframe = TH1D(hname, "", 100, MinUnixTime, MaxUnixTime)
-    hframe.SetStats(0)
-    hframe.GetXaxis().SetLabelFont(132)
-    hframe.GetXaxis().SetTitleFont(132)
-    hframe.GetYaxis().SetLabelFont(132)
-    hframe.GetYaxis().SetTitleFont(132)
-    hframe.GetXaxis().SetLabelSize(0.)
-    hframe.GetXaxis().SetTitleSize(0.)
-    hframe.GetYaxis().SetLabelSize(0.)
-    hframe.GetYaxis().SetTitleSize(0.)
-    hframe.GetYaxis().SetRangeUser(MinValue, MaxValue)
-    if len(xtitle)>0:
-        hframe.GetXaxis().SetLabelSize(0.06)
-        hframe.GetXaxis().SetTitleSize(0.06)
-        hframe.GetXaxis().CenterTitle()
-        hframe.GetXaxis().SetTitle(xtitle)
-    if len(ytitle)>0:
-        hframe.GetYaxis().SetLabelSize(0.06)
-        hframe.GetYaxis().SetTitleSize(0.06)
-        hframe.GetYaxis().CenterTitle()
-        hframe.GetYaxis().SetTitle(ytitle)
-    return hframe
 
 
 # Get unixtime from time stamp
