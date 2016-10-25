@@ -35,13 +35,24 @@ python DrawPars.py .......
 
 [draw option list]
 
+======= variable list =========
+
+Basically it is just a file contain all the historian tags you want in your query. The file shall be sth like:
+
+Tag#1
+Tag#2
+.....
+
+You can check-out List/LXeFilling_IDList.txt for an example
+
 ======= draw option list format: ========
 
- Two types of line can be put in there:
- 
-1) # Historian Tag 	...	 #Alias name
+The draw option list consists of two pars:
+1) define the alias for the historian tags:
 
-2) # formulat with alias \t....\t # title \t...\t [lowest coordinate of the whole canvas] \t...\t [uppermost y coordinate of the whole canvas] \t...\t [python color]
+Tag#1        Alias#1
+Tag#2        Alias#2
+......
 
-Note that the different elements MUST be separated by \t
+2) Then 
 
